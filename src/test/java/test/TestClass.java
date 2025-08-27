@@ -40,8 +40,9 @@ public class TestClass {
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
 //        boolean valid =driver.findElement(By.xpath("(//img)[2]")).isDisplayed();
-        assertTrue(driver.findElement(By.xpath("(//img)[2]")).isDisplayed());
+        softAssert.assertTrue(driver.findElement(By.xpath("(//img)[1]")).isDisplayed());
 //        driver.quit();
+        softAssert.assertAll();   //for collect all assertions
     }
 
     @Test
@@ -59,7 +60,8 @@ public class TestClass {
 //        driver.quit();
     }
     @Test
-    public void tc4(){
+    public void tc4()
+    {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
@@ -69,6 +71,20 @@ public class TestClass {
         String actualResult= driver.findElement(By.id("1294723603")).getText();
         String expectedResult ="TestNG Tutorial";
         softAssert.assertTrue(actualResult.contains(expectedResult), " the text of the fourth result is not [TestNG Tutorial]");
+        softAssert.assertAll();
+    }
+    @Test
+    public void tc5()
+    {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://duckduckgo.com/");
+        driver.findElement(By.xpath("//input[@id='searchbox_input']")).sendKeys("Cucumber IO");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String actualResult = driver.findElement(By.xpath("(//*[@data-testid='result-title-a'])[2]")).getAttribute("href");
+        String expectedResult = "https://www.linkedin.com";
+        softAssert.assertTrue(actualResult.contains(expectedResult),"The link does not contain " + expectedResult);
         softAssert.assertAll();
     }
 
