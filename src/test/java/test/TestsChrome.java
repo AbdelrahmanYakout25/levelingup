@@ -1,50 +1,68 @@
 package test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 //import org.testng.annotations.AfterClass;
 //import org.testng.annotations.AfterTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.time.Duration;
 
 import static org.testng.AssertJUnit.*;
 
-public class TestClass {
+public class TestsChrome {
 //    WebDriver driver = new ChromeDriver();
     WebDriver driver;
     SoftAssert softAssert = new SoftAssert();
     WebDriverWait wait;
+    @BeforeMethod
+    public void setUp()
+    {
+        driver = new ChromeDriver();
+        driver.manage().window().setSize(new Dimension(720, 480));
+        driver.manage().window().setPosition(new Point(0, 0));
+    }
 
-
+    /**
+     * Test Case 1: Verify DuckDuckGo Homepage Title
+     * Steps:
+     * 1. Open Google Chrome.
+     * 2. Navigate to https://duckduckgo.com/
+     * 3. Assert that the page title is "DuckDuckGo".
+     * 4. Close Google Chrome.
+     * Expected Result: The page title should be "DuckDuckGo".
+     */
     @Test
     public void tc1()
     {
 //        SoftAssert softAssert = new SoftAssert();
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(720,480));
-        driver.manage().window().setPosition(new Point(0,0));
+        //driver = new ChromeDriver();
+//        driver.manage().window().setSize(new Dimension(720,480));
+//        driver.manage().window().setPosition(new Point(0,0));
         driver.get("https://duckduckgo.com/");
         String actualResult = driver.getTitle();
         String expectedResult = "Google";
 //        softAssert.assertTrue(actualResult.contains("Google"), "URL does not contain duckduckgo");
 //        softAssert.assertAll();   //for collect all assertions
         Assert.assertEquals(actualResult, expectedResult, "Title mismatch!");
+//        element.sendKeys("username", Keys.TAB,"password",Keys.TAB,Keys.ENTER)  //this for easy login
+//        element.sendkeys("""
+//                this is a text block
+//                with multiple lines
+//                and indentation
+//                """); //this is for text block in java 15
     }
 
     @Test
     public void tc2()
     {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(720,480));
-        driver.manage().window().setPosition(new Point(0,0));
+//        driver = new ChromeDriver();
+//        driver.manage().window().setSize(new Dimension(720,480));
+//        driver.manage().window().setPosition(new Point(0,0));
         driver.get("https://duckduckgo.com/");
 //        boolean valid =driver.findElement(By.xpath("(//img)[2]")).isDisplayed();
         softAssert.assertTrue(driver.findElement(By.xpath("(//img)[1]")).isDisplayed());
@@ -55,9 +73,9 @@ public class TestClass {
     @Test
     public void tc3()
     {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(720,480));
-        driver.manage().window().setPosition(new Point(0,0));
+//        driver = new ChromeDriver();
+//        driver.manage().window().setSize(new Dimension(720,480));
+//        driver.manage().window().setPosition(new Point(0,0));
         driver.get("https://duckduckgo.com/");
         driver.findElement(By.xpath("//input[@id='searchbox_input']")).sendKeys("Selenium WebDriver");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
@@ -67,27 +85,27 @@ public class TestClass {
         assertEquals(actualResult,expectedResult);
 //        driver.quit();
     }
-    @Test
-    public void tc4()
-    {
-        driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(720,480));
-        driver.manage().window().setPosition(new Point(0,0));
-        driver.get("https://duckduckgo.com/");
-        driver.findElement(By.xpath("//input[@id='searchbox_input']")).sendKeys("TestNG Tutorial");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("1294723603"))));
-        String actualResult= driver.findElement(By.id("1294723603")).getText();
-        String expectedResult ="TestNG Tutorial";
-        softAssert.assertTrue(actualResult.contains(expectedResult), " the text of the fourth result is not [TestNG Tutorial]");
-        softAssert.assertAll();
-    }
+//    @Test
+//    public void tc4()
+//    {
+////        driver = new FirefoxDriver();
+////        driver.manage().window().setSize(new Dimension(720,480));
+////        driver.manage().window().setPosition(new Point(0,0));
+//        driver.get("https://duckduckgo.com/");
+//        driver.findElement(By.xpath("//input[@id='searchbox_input']")).sendKeys("TestNG Tutorial");
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("1294723603"))));
+//        String actualResult= driver.findElement(By.id("1294723603")).getText();
+//        String expectedResult ="TestNG Tutorial";
+//        softAssert.assertTrue(actualResult.contains(expectedResult), " the text of the fourth result is not [TestNG Tutorial]");
+//        softAssert.assertAll();
+//    }
     @Test
     public void tc5()
     {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(720,480));
-        driver.manage().window().setPosition(new Point(0,0));
+//        driver = new ChromeDriver();
+//        driver.manage().window().setSize(new Dimension(720,480));
+//        driver.manage().window().setPosition(new Point(0,0));
         driver.get("https://duckduckgo.com/");
         driver.findElement(By.xpath("//input[@id='searchbox_input']")).sendKeys("Cucumber IO");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
